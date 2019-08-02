@@ -33,6 +33,9 @@ library(extrafont) # for additional fonts, such as Roboto condensed
 
 # Data import  ---------------------------
 df <- read_csv("data/youth_scan_rescan.csv")
+
+# clear 2 digit notebook output
+options(scipen = 2, digits = 2) 
 ```
 
 
