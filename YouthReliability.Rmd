@@ -478,7 +478,7 @@ omni_dat %>%
 
 # for OHBM2019 figure
 # save plot
-ggsave("figs/DTI_ICC_Plot.png", dpi = 1000, # change for pub
+ggsave("figs/Fig 2. DTI_ICC.png", dpi = 1000, # change for pub
        width = 6, height = 5.25)
 
 ```
