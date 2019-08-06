@@ -439,15 +439,16 @@ omni_dat <- bind_rows(fa, rd, md, ad)
 ```
 
 ```{r}
-# needs free Roboto Condensed font
+# needs free Roboto Condensed font, download below:
 # https://fonts.google.com/specimen/Roboto+Condensed
-
+ 
+# uncomment below to run figure from paper version:
 # load fonts based on OS
-if(.Platform$OS.type == "Windows") {
-  extrafont::loadfonts(device = "win")
-} else {
-  extrafont::loadfonts()
-}
+# if(.Platform$OS.type == "Windows") {
+#  extrafont::loadfonts(device = "win")
+# } else {
+#  extrafont::loadfonts()
+# }
 
 # wrangle data for plot
 omni_dat %>% 
@@ -461,8 +462,9 @@ omni_dat %>%
   ggplot(aes(x = dat, y = ICC, label = signif(ICC, 2))) + 
   geom_errorbar(aes(ymin = lower, ymax = upper), 
                 width = 0.15, size = 0.85, color = "#1D7F79") +
-  # modern theme w/ roboto font
-  hrbrthemes::theme_ipsum_rc() + 
+  # modern theme w/ roboto font, uncomment below, and comment out theme_minimal
+  # hrbrthemes::theme_ipsum_rc() + 
+  theme_minimal() +
   geom_point(size = 8.5, color = "#1D7F79") +
   geom_text(color = "white", size = 3) +
   scale_y_continuous(limits = c(0.64, 0.95), 
@@ -476,34 +478,8 @@ omni_dat %>%
        Error bars represent 95% confidence intervals.")
 
 # save plot
-# ggsave("figs/DTI_ICC_Plot.png", dpi = 300, # change for pub
-#       width = 7.25, height = 5)
+ggsave("figs/Fig 2. DTI_ICC.pdf", dpi = 1000,
+       width = 7.25, height = 5)
 
-# for OHBM2019 figure
-# save plot
-ggsave("figs/Fig 2. DTI_ICC.png", dpi = 1000, # change for pub
-       width = 6, height = 5.25)
-
-```
-
-```{r eval=FALSE, include=FALSE}
-# for visualizing relative ICC across all data
-fa <- fa %>% mutate(dat = "FA")
-rd <- rd %>% mutate(dat = "RD")
-md <- md %>% mutate(dat = "MD")
-ad <- ad %>% mutate(dat = "AD")
-gm <- gm %>% mutate(dat = "GM")
-sa <- area %>% mutate(dat = "SA")
-ct <- thick %>% mutate(dat = "CT")
-lgi <- lgi %>% mutate(dat = "lgi")
-
-# combine datasets into one for plotting
-all_dat <- bind_rows(gm, sa, ct, lgi, fa, rd, md, ad)
-
-# view lower bound CI cross into poor
-all_dat %>% 
-  arrange(ICC) %>% 
-  filter(Classification != "Excellent") %>%
-  group_by(dat, ROI)
 ```
 
