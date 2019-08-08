@@ -14,8 +14,7 @@ output:
 # Load packages  ---------------------------
 
 # this installs missing packages, description below
-list_of_packages <- c("tidyverse", "here", "lubridate", "ICC", 
-                      "hrbrthemes", "extrafont", "glue"
+list_of_packages <- c("tidyverse", "here", "lubridate", "ICC",  "glue"
 )
 
 new_packages <- list_of_packages[!(list_of_packages %in%
@@ -27,9 +26,7 @@ library(tidyverse) # ggplot, dplyr, tidyr, readr, purr, tibble
 library(here) # here() starts at R Project directory, cross platform paths
 library(lubridate) # working with dates
 library(ICC) # ICC and CI
-library(hrbrthemes) # plots with custom fonts
 library(glue) # interpolate data into strings
-library(extrafont) # for additional fonts, such as Roboto condensed
 
 # Data import  ---------------------------
 df <- read_csv("data/youth_scan_rescan.csv")
@@ -54,7 +51,7 @@ ICCs are classified according to Cicchetti as
 ## Main functions
 
 * Click the code button on the right to expand text field containing the primary functions used in this analysis.
-* They primarily rely on the `tidyverse` series of packages for data wrangling and the `ICCest` package for ICC calculations.
+* They primarily rely on the `tidyverse` series of packages for data wrangling and the `ICC` package for ICC calculations.
 
 ```{r}
 # Helper functions using ICCest package to calc ICC and CI
@@ -120,6 +117,8 @@ print_inline_icc <- function(x){
 
 ## Figure 1
 ![](figs/Fig 1. All GM.jpg)
+**Figure 1.** Reliability of cortical grey matter measures. Scan-rescan reliability of Desikan-Killiany regions. Intraclass correlation coefficient (ICC) values: poor (<0.40), fair (0.41–0.59), good (> 0.59 – 0.74), excellent (> 0.74). A. Cortical grey matter volume. B. Cortical surface area. C. Cortical thickness. D. Local gyrification index.
+
 
 ## Table 1. Grey matter volume {.tabset .tabset-pills}
 
@@ -439,15 +438,17 @@ omni_dat <- bind_rows(fa, rd, md, ad)
 ```
 
 ```{r}
-# needs free Roboto Condensed font, download below:
+# paper version needs free Roboto Condensed font, download below:
 # https://fonts.google.com/specimen/Roboto+Condensed
  
-# uncomment below to run figure from paper version:
-# load fonts based on OS
+# uncomment below to run nice font version:
+# library(hrbrthemes) # plots with custom fonts
+# library(extrafont) # for additional fonts, such as Roboto condensed
+#
 # if(.Platform$OS.type == "Windows") {
-#  extrafont::loadfonts(device = "win")
+#   extrafont::loadfonts(device = "win")
 # } else {
-#  extrafont::loadfonts()
+#   extrafont::loadfonts()
 # }
 
 # wrangle data for plot
@@ -478,8 +479,8 @@ omni_dat %>%
        Error bars represent 95% confidence intervals.")
 
 # save plot
-ggsave("figs/Fig 2. DTI_ICC.pdf", dpi = 1000,
-       width = 7.25, height = 5)
-
+# ggsave("figs/Fig 2. DTI_ICC.png", dpi = 1000,
+#       width = 7.25, height = 5)
 ```
 
+**Figure 2.** Scan-rescan reliability of diffusion tensor imaging (DTI) measures.
