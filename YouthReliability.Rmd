@@ -23,7 +23,7 @@ if(length(new_packages)) install.packages(new_packages)
 # load packages
 library(tidyverse) # ggplot, dplyr, tidyr, readr, purr, tibble
 library(ICC) # ICC and CI
-library(glue) # interpolate data into strings for in-text output
+library(glue) # data into strings for in-text output
 
 # Data import  ---------------------------
 df <- read_csv("data/youth_scan_rescan.csv")

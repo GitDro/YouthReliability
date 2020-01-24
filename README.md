@@ -24,8 +24,6 @@ Note, running the notebook will check for required R packages and install them i
 
 ```{r}
 library(tidyverse) # ggplot, dplyr, tidyr, readr, purr, tibble
-library(here) # here() starts at R Project directory, cross platform paths
-library(lubridate) # working with dates
 library(ICC) # ICC and CI
-library(glue) # interpolate data into strings
+library(glue) # data into strings for in-text output
 ```
