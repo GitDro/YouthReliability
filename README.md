@@ -27,3 +27,5 @@ library(tidyverse) # ggplot, dplyr, tidyr, readr, purr, tibble
 library(ICC) # ICC and CI
 library(glue) # data into strings for in-text output
 ```
+
+[![DOI](https://zenodo.org/badge/200237986.svg)](https://zenodo.org/badge/latestdoi/200237986)
