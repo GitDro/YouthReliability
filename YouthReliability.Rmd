@@ -10,12 +10,11 @@ output:
     code_folding: hide
 ---
 
-```{r}
+```{r, message = F, warning = F}
 # Load packages  ---------------------------
 
 # this installs missing packages, description below
-list_of_packages <- c("tidyverse", "here", "lubridate", "ICC",  "glue"
-)
+list_of_packages <- c("tidyverse", "ICC",  "glue")
 
 new_packages <- list_of_packages[!(list_of_packages %in%
                                      installed.packages()[,"Package"])]
@@ -23,15 +22,13 @@ if(length(new_packages)) install.packages(new_packages)
 
 # load packages
 library(tidyverse) # ggplot, dplyr, tidyr, readr, purr, tibble
-library(here) # here() starts at R Project directory, cross platform paths
-library(lubridate) # working with dates
 library(ICC) # ICC and CI
-library(glue) # interpolate data into strings
+library(glue) # interpolate data into strings for in-text output
 
 # Data import  ---------------------------
 df <- read_csv("data/youth_scan_rescan.csv")
 
-# clear 2 digit notebook output
+# readable 2 digit notebook output
 options(scipen = 2, digits = 2) 
 ```
 
@@ -67,13 +64,15 @@ classify_icc <- function(x) {
   # finally it creates a grouping variable for the hemispheres
   x %>%
   # nest by ROI for regional output
-  tidyr::nest(-ROI) %>%
+  tidyr::nest(data = -ROI) %>%
   # use previously defined est_icc functions
   dplyr::mutate(
     `2.5% CI` = purrr::map(data, est_lower_icc),
     `ICC` = purrr::map(data, est_icc),
     `97.5% CI` = purrr::map(data, est_upper_icc)) %>%
-  tidyr::unnest(`2.5% CI`, `ICC`, `97.5% CI`, .drop = T) %>%
+  # removes nested data column to simplify output
+  dplyr::select(-data) %>%
+  tidyr::unnest(cols = c(`2.5% CI`, `ICC`, `97.5% CI`)) %>%
   # classify based on Cicchetti
   dplyr::mutate(Classification = case_when(
     ICC > 0.74 ~ "Excellent",
