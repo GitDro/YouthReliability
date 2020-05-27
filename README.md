@@ -1,7 +1,10 @@
-# Reliability developmental MRI
+# Reliability of developmental MRI
 
-Contains data and analysis towards "Reliability of multimodal MRI brain measures in youth at risk for mental illness" by Drobinin et al.
+Contains data and analysis towards:
 
+> Drobinin, V., Gestel, H. V., Helmick, C. A., Schmidt, M. H., Bowen, C. V., & Uher, R. (2020). Reliability of multimodal MRI brain measures in youth at risk for mental illness. Brain and Behavior, e01609. https://doi.org/10.1002/brb3.1609
+
+![Structural reliability](https://github.com/GitDro/YouthReliability/blob/master/figs/Fig%201.%20All%20GM.jpg)
 
 ## Getting started
 
